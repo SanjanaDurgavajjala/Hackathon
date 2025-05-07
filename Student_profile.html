@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+body {
+       font-family: Arial, sans-serif;
+       background-color: #f4f4f4;
+       margin: 0;
+       padding: 20px;
+     }
+.profile-container {
+       max-width: 800px;
+       background: white;
+       margin: auto;
+       padding: 20px;
+       border-radius: 10px;
+       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+     }
+.profile-header {
+       text-align: center;
+       position: relative;
+     }
+.profile-pic-container {
+       position: relative;
+       display: inline-block;
+     }
+.profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #3498db;
+     }
+.upload-icon {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background: #2980b9;
+        color: white;
+        border-radius: 50%;
+        padding: 8px;
+        cursor: pointer;
+     }
+.profile-info {
+        text-align: center;
+     }
+.section {
+        margin-top: 20px;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        background: #ecf0f1;
+        border-radius: 5px;
+     }
+.section h3 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+     }
+.input-field {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+     }
+.resume-upload input {
+        display: block;
+        margin-top: 10px;
+     }
+.save-btn {
+        display: block;
+        width: 100px;
+        margin: 20px auto;
+        padding: 10px;
+        background: #27ae60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+     }
+#profile-pic-input {
+        display: none;
+     }
+</style>
+</head>
+<body>
+<div class="profile-container">
+<div class="profile-header">
+<div class="profile-pic-container">
+<img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-pic" id="profile-pic">
+<label for="profile-pic-input" class="upload-icon"><i class="fas fa-camera"></i></label>
+<input type="file" id="profile-pic-input" accept="image/*" onchange="previewProfilePic()">
+</div>
+<input type="text" id="name" class="input-field" placeholder="Enter Name">
+<input type="email" id="email" class="input-field" placeholder="Enter Email">
+<input type="text" id="phone" class="input-field" placeholder="Enter Phone Number">
+</div>
+<div class="section">
+<h3><i class="fas fa-user"></i> Bio</h3>
+<textarea id="bio" class="input-field" placeholder="Enter Bio"></textarea>
+</div>
+<div class="section">
+<h3><i class="fas fa-code"></i> Skills</h3>
+<input type="text" id="skills" class="input-field" placeholder="Enter Skills">
+</div>
+<div class="section">
+<h3><i class="fas fa-graduation-cap"></i> Education</h3>
+<input type="text" id="education" class="input-field" placeholder="Enter Education Details">
+</div>
+<div class="section">
+<h3><i class="fas fa-briefcase"></i> Projects</h3>
+<input type="text" id="projects" class="input-field" placeholder="Enter Projects">
+</div>
+<div class="section">
+<h3><i class="fas fa-link"></i> Portfolio</h3>
+<input type="text" id="portfolio" class="input-field" placeholder="Enter Portfolio Links">
+</div>
+<div class="section resume-upload">
+<h3><i class="fas fa-file-pdf"></i> Resume/CV</h3>
+<input type="file" id="resume" accept=".pdf">
+</div>
+<button class="save-btn" onclick="saveProfile()">Save Profile</button>
+</div>
+<script>
+function previewProfilePic() {
+const file = document.getElementById('profile-pic-input').files[0];
+if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+            document.getElementById('profile-pic').src = event.target.result;
+          };
+         reader.readAsDataURL(file);
+      }
+}
+function saveProfile() {
+       const profileData = {
+             name: document.getElementById('name').value,
+             email: document.getElementById('email').value,
+             phone: document.getElementById('phone').value,
+             bio: document.getElementById('bio').value,
+             skills: document.getElementById('skills').value,
+             education: document.getElementById('education').value,
+             projects: document.getElementById('projects').value,
+             portfolio: document.getElementById('portfolio').value
+         };
+      localStorage.setItem('profileData', JSON.stringify(profileData));
+      alert('Profile saved successfully!');
+    }
+</script>
+</body>
+</html>
